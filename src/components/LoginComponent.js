@@ -1,35 +1,41 @@
 import React from 'react';
+import { Route, Link, Redirect, Switch, withRouter } from 'react-router-dom';
+import SigninComponent from './SignInComponent';
+import CreateAccountComponent from './CreateAccountComponent';
+
 
 class LoginComponent extends React.Component {
     state = {
-        type: 'login',
-        name: '',
-        pswd: '',
-        role: ''
+        type: 'signin'
     }
+
+    login = () => {
+        this.setState(prevState =>  {
+            if (prevState.type === 'create') {
+                return ({type: 'signin'})
+            }
+        })
+    }
+
+    create = () => {
+        this.setState(prevState => {
+            if (prevState.type === 'signin') {
+                return ( {type: 'create'})
+            }
+        })
+    }
+
 
     render() {
         return (
             <div>
-               <div>
-               <h1>JOBBOX</h1>
-               <button>Login</button>
-               <button>Create Account</button>
-               </div>
-               <form>
-                    <label>User Name:
-                    <input type="text" name="name" />
-                    </label>
-                    <br />
-                    <label>Password:
-                    <input type="text" name="name" />
-                    </label>
-                    <br />
-                    <label > <input type="radio" name='role' value="Job seeke" onChange={this.handleChange}/>Job seeker</label><br/>
-                    <label > <input type="radio" name='role' value="Recruiter" onChange={this.handleChange}/>Recruiter</label>
-
-               </form>
-               <button>Submit</button>
+                <div>
+                    <h1>JOBBOX</h1>
+                    <button onClick={this.login}>Login</button>
+                    <button onClick={this.create}>Create Account</button>
+                </div>
+                {this.state.type === 'signin' && <SigninComponent history= {this.props}/>}
+                {this.state.type === 'create' && <CreateAccountComponent />}
             </div>
         );
     }

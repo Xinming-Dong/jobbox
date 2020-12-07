@@ -1,7 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import JobSeekerComponent from './components/JobSeekerComponent';
 import LoginComponent from './components/LoginComponent';
+import { Route, Link, Redirect, Switch, withRouter } from 'react-router-dom';
 
 function App() {
   return (
